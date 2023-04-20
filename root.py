@@ -47,7 +47,7 @@ table_button.pack(pady=10)
 notebook_button = tkb.Button(menu_frame, text='НОТАТКИ', bootstyle="primary", width=20, command=notebook_on)
 notebook_button.pack(pady=10)
 # Version_Label
-version_label = tkb.Label(menu_frame, text="Mentala Beta 2023 | 0.1", font=("Gotham", 10), bootstyle="primary")
+version_label = tkb.Label(menu_frame, text="Mentala Beta 2023 | 0.3", font=("Gotham", 10), bootstyle="primary")
 version_label.pack(anchor="sw", side=tkb.BOTTOM, padx=10)
 # ------Menu_Frame------
 
