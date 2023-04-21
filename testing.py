@@ -1,35 +1,47 @@
-import ttkbootstrap as tkb
-
-window = tkb.Window(themename='vapor')
-
-window.title("NoteBookWidget")
-window.geometry('500x400')
-
-my_notebook = tkb.Notebook(window, bootstyle='dark')
-my_notebook.pack(pady=20)
-
-tab1 = tkb.Frame(my_notebook)
-tab2 = tkb.Frame(my_notebook)
-
-my_label = tkb.Label(tab1, text="My Awesome Label!", font=('Helvetica', 18))
-my_label.pack(pady=20)
-
-my_text = tkb.Text(tab1, width=70, height=10)
-my_text.pack(pady=10, padx=10)
-
-my_text1 = tkb.Text(tab2, width=70, height=10)
-my_text1.pack(pady=10, padx=10)
-
-my_button = tkb.Button(tab1, text="Click me!", bootstyle='danger-outline')
-my_button.pack(pady=2)
-
-my_label2 = tkb.Label(tab2, text="Balalalala", font=('Helvetica', 18))
-my_label2.pack(pady=20)
-
-#Add frames
-
-my_notebook.add(tab1, text='Tab one')
-my_notebook.add(tab2, text='Tab two')
+import tkinter as tk
+import ttkbootstrap as ttkbs
 
 
-window.mainloop()
+class NoteBookApp:
+    def __init__(self):
+        self.root = tk.Tk()
+        self.root.title("Notebook App")
+
+        # Создаем Notebook виджет
+        self.notebook = ttkbs.Notebook(self.root)
+        self.notebook.pack(expand=True, fill="both")
+
+        # Создаем вкладку для записей
+        self.notes_tab = ttkbs.Frame(self.notebook)
+        self.notebook.add(self.notes_tab, text='Notes')
+
+        # Создаем текстовое поле для записей
+        self.notes_text = tk.Text(self.notes_tab, height=10, width=50)
+        self.notes_text.pack(side="left", fill="both", expand=True)
+
+        # Создаем кнопку для сохранения записей
+        save_button = ttkbs.Button(self.notes_tab, text="Save", command=self.save_notes)
+        save_button.pack(side="right")
+
+        # Загружаем предыдущие записи, если они есть
+        try:
+            with open("saved_notes.txt", "r") as f:
+                notes = f.read()
+                self.notes_text.insert("end", notes)
+        except FileNotFoundError:
+            pass
+
+    def save_notes(self):
+        # Получаем содержимое текстового поля
+        notes = self.notes_text.get("1.0", "end-1c")
+        # Сохраняем записи в файл
+        with open("saved_notes.txt", "w") as f:
+            f.write(notes)
+
+    def run(self):
+        self.root.mainloop()
+
+
+if __name__ == '__main__':
+    app = NoteBookApp()
+    app.run()

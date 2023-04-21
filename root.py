@@ -18,12 +18,26 @@ def notebook_on():
 def table_on():
     table_main_frame.tkraise()
 
-
 # Main_Root_Settings
 root = tkb.Window(themename="vapor")
 root.geometry("1000x500+300+200")
 root.resizable(False, False)
 root.title("Mentala")
+
+# Functions
+def save_content():
+    content = my_text.get("1.0", "end-1c")
+    with open("saved_content.txt", "w") as f:
+        f.write(content)
+
+# App Menu
+main_menu = tkb.Menu(root)
+root.config(menu=main_menu)
+
+# Menu Items
+file_menu = tkb.Menu(main_menu, tearoff=False)
+main_menu.add_cascade(label="File", menu=file_menu)
+file_menu.add_cascade(label="Save", command=save_content)
 
 # Root_Grid_Configure
 root.rowconfigure(0, weight=1)
