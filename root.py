@@ -5,20 +5,19 @@
 import ttkbootstrap as tkb
 import tkinter as tk
 from ttkbootstrap.constants import *
-# APP_IMPORTS
-import notebook_frame, tests_frame, table_frame
 
 # Create_Test_Frame
 def test_on():
-    tests_frame.create_test_frame(root)
+    tests_main_frame.tkraise()
 
 # Create_NoteBook_Frame
 def notebook_on():
-    notebook_frame.create_notebook_frame(root)
+    notebook_main_frame.tkraise()
 
 # Create_Table_Frame
 def table_on():
-    table_frame.create_table_frame(root)
+    table_main_frame.tkraise()
+
 
 # Main_Root_Settings
 root = tkb.Window(themename="vapor")
@@ -51,8 +50,41 @@ version_label = tkb.Label(menu_frame, text="Mentala Beta 2023 | 0.3", font=("Got
 version_label.pack(anchor="sw", side=tkb.BOTTOM, padx=10)
 # ------Menu_Frame------
 
+# ==========Create NoteBook_Widget=========
+notebook_main_frame = tkb.Frame(root, bootstyle="dark")
+notebook_main_frame.grid(row=0, column=1, sticky="nsew")
+# Test_Frame_Name
+test_name_label = tkb.Label(notebook_main_frame, text="НОТАТКИ", font=("Gotham-bold", 15), bootstyle="inverse-dark")
+test_name_label.pack(pady=10)
+my_notebook = tkb.Notebook(notebook_main_frame, bootstyle='dark')
+my_notebook.pack(pady=20)
+# Create PAGE
+tab1 = tkb.Frame(my_notebook)
+# Create TextField
+my_text = tkb.Text(tab1, width=70, height=10)
+my_text.pack(pady=10, padx=10)
+# Add Frame
+my_notebook.add(tab1, text='NOTES')
+# ==========Create NoteBook_Widget=========
+
+# ==========Tests_Frame=========
+tests_main_frame = tkb.Frame(root, bootstyle="dark")
+tests_main_frame.grid(row=0, column=1, sticky="nsew")
+# Test_Frame_Name
+test_name_label = tkb.Label(tests_main_frame, text="ТЕСТУВАННЯ", font=("Gotham-bold", 15), bootstyle="inverse-dark")
+test_name_label.pack(pady=10)
+# ==========Tests_Frame=========
+
+# ==========Table_Frame=========
+table_main_frame = tkb.Frame(root, bootstyle="dark")
+table_main_frame.grid(row=0, column=1, sticky="nsew")
+# Test_Frame_Name
+test_name_label = tkb.Label(table_main_frame, text="ТАБЛИЦЯ", font=("Gotham-bold", 15), bootstyle="inverse-dark")
+test_name_label.pack(pady=10)
+# ==========Table_Frame=========
+
 # Set_Default_Frame
-tests_frame.create_test_frame(root)
+tests_main_frame.tkraise()
 # Execute_Main_Loop
 root.mainloop()
 
