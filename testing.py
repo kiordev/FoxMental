@@ -1,77 +1,128 @@
 import ttkbootstrap as tkb
+from ttkbootstrap.constants import *
+from ttkbootstrap.toast import ToastNotification
+from ttkbootstrap.tableview import Tableview
+from ttkbootstrap.validation import add_regex_validation
 
-# Создание окна
-root = tkb.Window()
-root.title("Моя таблица")
+class Gradebook(tkb.Frame):
+    def __init__(self, master_window):
+        super().__init__(master_window, padding=(20, 10))
+        self.pack(fill=BOTH, expand=YES)
+        self.name = tkb.StringVar(value="")
+        self.course_name = tkb.StringVar(value="")
+        self.student_id = tkb.StringVar(value="")
+        self.final_score = tkb.StringVar(value=0)
+        self.data=[]
+        self.colors = master_window.style.colors
 
-# Создание фрейма для таблицы
-table_frame = tkb.Frame(root, bootstyle='dark')
-table_frame.pack(pady=20)
+        instruction_text = "Please Enter your contact information: "
+        instrucion = tkb.Label(self, text=instruction_text, width=50)
+        instrucion.pack(fill=tkb.X, pady=10)
 
-# Создание заголовков для колонок
-columns = ("Событие", "Мысли", "Эмоция", "Действие")
+        self.create_form_entry("Name: ", self.name)
+        self.create_form_entry("ID: ", self.student_id)
+        self.create_form_entry("Course: ", self.course_name)
+        self.final_score_input = self.create_form_entry("Final Score: ", self.final_score)
 
-# Создание таблицы
-table = tkb.Treeview(table_frame, columns=columns, show="headings")
-for col in columns:
-    table.heading(col, text=col)
+        self.create_meter()
+        self.create_button()
+        self.table = self.create_table()
+    def create_form_entry(self, label, variable): #Create Inputs
+        form_field_container = tkb.Frame(self)
+        form_field_container.pack(fill=tkb.X, expand=YES, pady=5)
 
-# Установка ширины колонок
-table.column("Событие", width=200)
-table.column("Мысли", width=200)
-table.column("Эмоция", width=200)
-table.column("Действие", width=200)
+        form_field_label = tkb.Label(master=form_field_container, text=label, width=15)
+        form_field_label.pack(side=tkb.LEFT, padx=12)
 
-# Загрузка данных из файла, если он существует
-try:
-    with open("table_data.txt", "r") as f:
-        for line in f:
-            row_data = line.strip().split(",")
-            table.insert("", tkb.END, values=row_data)
-except FileNotFoundError:
-    pass
+        form_input = tkb.Entry(master=form_field_container, textvariable=variable)
+        form_input.pack(side=tkb.LEFT, padx=5, fill=tkb.X, expand=YES)
 
-# MAIN_TABLE_ENTRIES
-event_entry = tkb.Entry(root, font=("Arial", 12), width=30)
-event_entry.pack(pady=10)
-thoughts_entry = tkb.Entry(root, font=("Arial", 12), width=30)
-thoughts_entry.pack(pady=10)
-emotion_entry = tkb.Entry(root, font=("Arial", 12), width=30)
-emotion_entry.pack(pady=10)
-action_entry = tkb.Entry(root, font=("Arial", 12), width=30)
-action_entry.pack(pady=10)
-def add_row():
-    # Получение данных из полей ввода
-    event = event_entry.get()
-    thoughts = thoughts_entry.get()
-    emotion = emotion_entry.get()
-    action = action_entry.get()
+        add_regex_validation(form_input, r'^[a-zA-Z0-9_]*$')
+        return form_input
 
-    # Добавление новой строки в таблицу
-    table.insert("", tkb.END, values=(event, thoughts, emotion, action))
+    def create_meter(self): #Create Meter
+        meter = tkb.Meter(
+            master=self,
+            metersize=150,
+            padding=5,
+            amounttotal=100,
+            amountused=50,
+            metertype='full',
+            subtext="Final Score",
+            interactive=True,
+        )
+        meter.pack()
+        self.final_score.set(meter.amountusedvar)
+        self.final_score_input.configure(textvariable=meter.amountusedvar)
 
-    # Очистка полей ввода
-    event_entry.delete(0, tkb.END)
-    thoughts_entry.delete(0, tkb.END)
-    emotion_entry.delete(0, tkb.END)
-    action_entry.delete(0, tkb.END)
 
-def save_table_data():
-    # Сохранение данных таблицы в файл
-    with open("table_data.txt", "w") as f:
-        for row_id in table.get_children():
-            row_data = table.item(row_id)["values"]
-            f.write(",".join(row_data) + "\n")
+    def create_button(self): # Create buttons
+        button_container = tkb.Frame(self)
+        button_container.pack(fill=tkb.X, expand=YES, pady=(15, 10))
 
-# Размещение кнопок на окне
-add_button = tkb.Button(root, text="Добавить", command=add_row)
-add_button.pack(pady=10)
+        cancel_button = tkb.Button(
+            master=button_container,
+            text="Cancel",
+            command=self.on_cancel,
+            bootstyle='danger',
+            width=6
+        )
+        cancel_button.pack(side=RIGHT, padx=5)
 
-save_button = tkb.Button(root, text="Сохранить", command=save_table_data)
-save_button.pack(pady=10)
+        submit_button = tkb.Button(
+            master=button_container,
+            text="Submit",
+            command=self.on_submit,
+            bootstyle='info',
+            width=6,
+        )
+        submit_button.pack(side=RIGHT, padx=5)
 
-# Размещение таблицы на окне
-table.pack()
 
-# Запуск главного цикла
-root.mainloop()
+    def on_submit(self):
+        name = self.name.get()
+        student_id = self.student_id.get()
+        course_name = self.course_name.get()
+        final_score = self.final_score_input.get()
+
+        toast = ToastNotification(
+            title="Submition successful",
+            message = "Your data has been successfully submitted",
+            duration=3000,
+        )
+
+        toast.show_toast()
+
+        self.data.append((name, student_id, course_name, final_score))
+        self.table.destroy()
+        self.table = self.create_table()
+
+    def on_cancel(self):
+        self.quit()
+
+
+    def create_table(self):
+        coldata=[
+            {"text": "Name"},
+            {"text": "Student ID"},
+            {"text": "Course Name"},
+            {"text": "Final Score"},
+        ]
+
+        table = Tableview(
+            master=self,
+            coldata=coldata,
+            rowdata=self.data,
+            paginated=True,
+            searchable=True,
+            bootstyle='primary',
+            stripecolor=(self.colors.light, None)
+        )
+
+        table.pack(fill=BOTH, expand=YES, padx=10, pady=10)
+        return table
+
+if __name__ == "__main__":
+    app = tkb.Window("GradeBook", "vapor", resizable=(False, False))
+    Gradebook(app)
+    app.mainloop()
