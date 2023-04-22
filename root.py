@@ -76,7 +76,7 @@ accept_theme_button.pack(pady=10, padx=10)
 theme_combobox.current(15)
 
 # Version_Label
-version_label = tkb.Label(menu_frame, text="Mentala | 0.5 | WINDOWS", font=("Gotham", 10), bootstyle="primary")
+version_label = tkb.Label(menu_frame, text="Mentala | 0.7 | WINDOWS", font=("Gotham", 10), bootstyle="primary")
 version_label.pack(anchor="s", side=tkb.BOTTOM, padx=10)
 
 # ------Menu_Frame------
