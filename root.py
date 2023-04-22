@@ -5,18 +5,21 @@
 import ttkbootstrap as tkb
 import tkinter as tk
 from ttkbootstrap.constants import *
+import NoteBookFrame as ntf
+import TestsFrame as tf
+import TableFrame as tabf
 
-# Create_Test_Frame
+# On_Test_Frame
 def test_on():
-    tests_main_frame.tkraise()
+    tf.TestsFrameOn(root)
 
-# Create_NoteBook_Frame
+# On_NoteBook_Frame
 def notebook_on():
-    notebook_main_frame.tkraise()
+    ntf.NoteBookOn(root)
 
-# Create_Table_Frame
+# On_Table_Frame
 def table_on():
-    table_main_frame.tkraise()
+    tabf.TableFrameOn(root)
 
 # Main_Root_Settings
 root = tkb.Window(themename="vapor")
@@ -35,7 +38,7 @@ root.columnconfigure(1, weight=5)
 menu_frame = tkb.Frame(root)
 menu_frame.grid(row=0, column=0, sticky="nsew")
 # Menu Label
-menu_label = tkb.Label(menu_frame, text="ГОЛОВНЕ МЕНЮ", font=("Gotham-bold", 15), bootstyle="primary")
+menu_label = tkb.Label(menu_frame, text="ГОЛОВНЕ МЕНЮ", font=("Gotham-bold", 10), bootstyle="primary")
 menu_label.pack(pady=10)
 # Start_Test_Button
 test_button = tkb.Button(menu_frame, text='ПРОЙТИ ТЕСТ', bootstyle="primary", width=20, command=test_on)
@@ -51,62 +54,8 @@ version_label = tkb.Label(menu_frame, text="Mentala Beta 2023 | 0.3", font=("Got
 version_label.pack(anchor="sw", side=tkb.BOTTOM, padx=10)
 # ------Menu_Frame------
 
-# ==========Create NoteBook_Frame=========
-notebook_main_frame = tkb.Frame(root, bootstyle="dark")
-notebook_main_frame.grid(row=0, column=1, sticky="nsew")
-
-# NoteBook_Frame_Name
-notebook_name_label = tkb.Label(notebook_main_frame, text="НОТАТКИ", font=("Gotham-bold", 15), bootstyle="inverse-dark")
-notebook_name_label.pack(pady=10)
-
-# NoteBook_Widget
-my_notebook = tkb.Notebook(notebook_main_frame, bootstyle='dark')
-my_notebook.pack(pady=20)
-
-# Create PAGE
-tab1 = tkb.Frame(my_notebook)
-my_notebook.add(tab1, text='NOTES')
-
-# Create a Text Field
-my_text = tkb.Text(tab1, height=10, width=90)
-my_text.pack()
-def save_notebook_content():
-    file = open('notes.txt', 'w')
-    content = my_text.get("1.0", "end-1c")
-    file.write(content)
-try:
-    file = open('notes.txt', 'r')
-    content = file.read()
-    my_text.insert('end', content)
-except FileNotFoundError:
-    pass
-
-# Save NoteBook Text Button
-save_button = tkb.Button(notebook_main_frame, text="СОХРАНИТЬ", bootstyle='primary', command=save_notebook_content)
-save_button.pack(pady=10)
-
-# ==========Create NoteBook_Widget=========
-
-# ==========Tests_Frame=========
-
-tests_main_frame = tkb.Frame(root, bootstyle="dark")
-tests_main_frame.grid(row=0, column=1, sticky="nsew")
-# Test_Frame_Name
-test_name_label = tkb.Label(tests_main_frame, text="ТЕСТУВАННЯ", font=("Gotham-bold", 15), bootstyle="inverse-dark")
-test_name_label.pack(pady=10)
-
-# ==========Tests_Frame=========
-
-# ==========Table_Frame=========
-table_main_frame = tkb.Frame(root, bootstyle="dark")
-table_main_frame.grid(row=0, column=1, sticky="nsew")
-# Test_Frame_Name
-test_name_label = tkb.Label(table_main_frame, text="ТАБЛИЦЯ", font=("Gotham-bold", 15), bootstyle="inverse-dark")
-test_name_label.pack(pady=10)
-# ==========Table_Frame=========
-
 # Set_Default_Frame
-tests_main_frame.tkraise()
+tf.TestsFrameOn(root)
 # Execute_Main_Loop
 root.mainloop()
 
