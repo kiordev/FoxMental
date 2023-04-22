@@ -1,47 +1,77 @@
-import tkinter as tk
-import ttkbootstrap as ttkbs
+import ttkbootstrap as tkb
 
+# Создание окна
+root = tkb.Window()
+root.title("Моя таблица")
 
-class NoteBookApp:
-    def __init__(self):
-        self.root = tk.Tk()
-        self.root.title("Notebook App")
+# Создание фрейма для таблицы
+table_frame = tkb.Frame(root, bootstyle='dark')
+table_frame.pack(pady=20)
 
-        # Создаем Notebook виджет
-        self.notebook = ttkbs.Notebook(self.root)
-        self.notebook.pack(expand=True, fill="both")
+# Создание заголовков для колонок
+columns = ("Событие", "Мысли", "Эмоция", "Действие")
 
-        # Создаем вкладку для записей
-        self.notes_tab = ttkbs.Frame(self.notebook)
-        self.notebook.add(self.notes_tab, text='Notes')
+# Создание таблицы
+table = tkb.Treeview(table_frame, columns=columns, show="headings")
+for col in columns:
+    table.heading(col, text=col)
 
-        # Создаем текстовое поле для записей
-        self.notes_text = tk.Text(self.notes_tab, height=10, width=50)
-        self.notes_text.pack(side="left", fill="both", expand=True)
+# Установка ширины колонок
+table.column("Событие", width=200)
+table.column("Мысли", width=200)
+table.column("Эмоция", width=200)
+table.column("Действие", width=200)
 
-        # Создаем кнопку для сохранения записей
-        save_button = ttkbs.Button(self.notes_tab, text="Save", command=self.save_notes)
-        save_button.pack(side="right")
+# Загрузка данных из файла, если он существует
+try:
+    with open("table_data.txt", "r") as f:
+        for line in f:
+            row_data = line.strip().split(",")
+            table.insert("", tkb.END, values=row_data)
+except FileNotFoundError:
+    pass
 
-        # Загружаем предыдущие записи, если они есть
-        try:
-            with open("saved_notes.txt", "r") as f:
-                notes = f.read()
-                self.notes_text.insert("end", notes)
-        except FileNotFoundError:
-            pass
+# MAIN_TABLE_ENTRIES
+event_entry = tkb.Entry(root, font=("Arial", 12), width=30)
+event_entry.pack(pady=10)
+thoughts_entry = tkb.Entry(root, font=("Arial", 12), width=30)
+thoughts_entry.pack(pady=10)
+emotion_entry = tkb.Entry(root, font=("Arial", 12), width=30)
+emotion_entry.pack(pady=10)
+action_entry = tkb.Entry(root, font=("Arial", 12), width=30)
+action_entry.pack(pady=10)
+def add_row():
+    # Получение данных из полей ввода
+    event = event_entry.get()
+    thoughts = thoughts_entry.get()
+    emotion = emotion_entry.get()
+    action = action_entry.get()
 
-    def save_notes(self):
-        # Получаем содержимое текстового поля
-        notes = self.notes_text.get("1.0", "end-1c")
-        # Сохраняем записи в файл
-        with open("saved_notes.txt", "w") as f:
-            f.write(notes)
+    # Добавление новой строки в таблицу
+    table.insert("", tkb.END, values=(event, thoughts, emotion, action))
 
-    def run(self):
-        self.root.mainloop()
+    # Очистка полей ввода
+    event_entry.delete(0, tkb.END)
+    thoughts_entry.delete(0, tkb.END)
+    emotion_entry.delete(0, tkb.END)
+    action_entry.delete(0, tkb.END)
 
+def save_table_data():
+    # Сохранение данных таблицы в файл
+    with open("table_data.txt", "w") as f:
+        for row_id in table.get_children():
+            row_data = table.item(row_id)["values"]
+            f.write(",".join(row_data) + "\n")
 
-if __name__ == '__main__':
-    app = NoteBookApp()
-    app.run()
+# Размещение кнопок на окне
+add_button = tkb.Button(root, text="Добавить", command=add_row)
+add_button.pack(pady=10)
+
+save_button = tkb.Button(root, text="Сохранить", command=save_table_data)
+save_button.pack(pady=10)
+
+# Размещение таблицы на окне
+table.pack()
+
+# Запуск главного цикла
+root.mainloop()

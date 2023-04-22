@@ -28,7 +28,7 @@ def accept_theme():
 
 # Main_Root_Settings
 root = tkb.Window(themename="vapor")
-root.geometry("1000x500+300+200")
+root.geometry("1200x500+300+200")
 root.resizable(False, False)
 root.title("Mentala")
 
@@ -36,8 +36,8 @@ root.title("Mentala")
 
 # Root_Grid_Configure
 root.rowconfigure(0, weight=1)
-root.columnconfigure(0, weight=1)
-root.columnconfigure(1, weight=5)
+root.columnconfigure(0, weight=0)
+root.columnconfigure(1, weight=10)
 
 # ------Menu_Frame------
 menu_frame = tkb.Frame(root)
