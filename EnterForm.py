@@ -3,26 +3,26 @@ import ttkbootstrap as tkb
 import tkinter as tk
 from ttkbootstrap.constants import *
 
-
 # Settings
-root = tkb.Window(themename="vapor", resizable=(False, False))
-root.geometry("500x500+300+200")
+root_lp = tkb.Window(themename="vapor", resizable=(False, False))
+root_lp.geometry("500x500+300+200")
 
-my_login = "sasha"
-my_password = "kior"
+my_login = "1"
+my_password = "1"
 
 def check_on():
     global my_login, my_password
     if login_entry.get() == my_login and password_entry.get() == my_password:
         login_entry.config(bootstyle='success')
         password_entry.config(bootstyle='success')
+
     else:
         login_entry.config(bootstyle='danger')
         password_entry.config(bootstyle='danger')
 
 
 # Main_Frame_Section
-main_frame_entry = tkb.Frame(root, bootstyle="dark", padding=(20, 10))
+main_frame_entry = tkb.Frame(root_lp, bootstyle="dark", padding=(20, 10))
 main_frame_entry.pack(expand=TRUE)
 
 # Meetings Section
@@ -45,4 +45,4 @@ password_entry.grid(row=2, column=1, padx=10, pady=10)
 accept_button = tkb.Button(main_frame_entry, text="ПРИНЯТЬ", bootstyle="primary-outline", command=check_on)
 accept_button.grid(row=3, column=0, columnspan=3, pady=5)
 # Execute
-root.mainloop()
+root_lp.mainloop()
