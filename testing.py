@@ -6,23 +6,31 @@ main_window = tkb.Window(themename="vapor")
 main_window.geometry("1000x500")
 main_window.resizable(False, False)
 
-test_label = tkb.Label(main_window, text="������� ������: ", font=('Gotham', 23), bootstyle='danger')
-test_label.pack(padx=60, pady=10, anchor='nw')
+def Test_Main_Logic():
+    if variants_buttons_list.test_name == "РАССТРОЙСТВО А":
+        print("РАССТРОЙСТВО А")
 
-# Test Frame
-tests_frame = ScrolledFrame(main_window, bootstyle='darkly', height=150, width=300)
-tests_frame.pack(anchor='nw', pady=0, padx=10)
+class Test:
 
-list = ["Some1", "Some2", "Some3", 'Some4', 'Some5', 'Some6', 'Some7', 'Some8', 'Some9']
+    # Создание кнопки
+    def __init__(self, spawn_frame, test_name, r, c):
+        tkb.Button(spawn_frame, bootstyle='danger', width=20, text=test_name, command=Test_Main_Logic).grid(row=r, column=c, padx=10, pady=10)
+        self.test_name = test_name
 
-# Button Spawn
+# Список расстройств
+variants_list = ["РАССТРОЙСТВО А", "РАССТРОЙСТВО B", "РАССТРОЙСТВО C", "РАССТРОЙСТВО D", "РАССТРОЙСТВО E", "РАССТРОЙСТВО F", "РАССТРОЙСТВО G", "РАССТРОЙСТВО H"]
+
+# Расстройства по кнопкам
+variants_buttons_list = []
+
 r, c = 0, 0
-for i in range(0, len(list)):
-    c += 1
-    tkb.Button(tests_frame, text=list[i], bootstyle='danger-outline', width=10).grid(row=r, column=c, padx=10, pady=10)
-    if c >= 2:
-        r, c = r+1, 0
+for i in range(0, 8):
+    variants_buttons_list.append(Test(main_window, variants_list[i], r, c))
+    r += 1
+    if r == 4:
+        c += 1
+        r = 0
 
-
+print(variants_buttons_list)
 # Execute
 main_window.mainloop()

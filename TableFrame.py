@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*- # за каким-то хреном он тупой, и не понимает, что тут UTF-8
 import ttkbootstrap as tkb
 import tkinter as tk
+# -- coding: utf-8 --
 def TableFrameOn(root):
     # =======Table_Main_Frame + Table=======
     table_main_frame = tkb.Frame(root, bootstyle="dark")
@@ -27,7 +27,7 @@ def TableFrameOn(root):
 
     # Метод проверки контента в файле
     try:
-        with open("table_data.txt", "r") as f:
+        with open("table_data.txt", "r", encoding='cp1251') as f:
             for line in f:
                 row_data = line.strip().split(",")
                 table.insert("", tkb.END, values=row_data)
@@ -76,7 +76,7 @@ def TableFrameOn(root):
     add_button = tkb.Button(table_main_frame, bootstyle='primary', text="ДОДАТИ ПОДІЮ", command=add_row)
     add_button.pack(pady=10)
     # Save Button
-    save_button = tkb.Button(table_main_frame, text="ЗБЕРЕГТИ", bootstyle='primary',command=save_table_data)
+    save_button = tkb.Button(table_main_frame, text="ЗБЕРЕГТИ", bootstyle='primary', command=save_table_data)
     save_button.pack(pady=10)
 
     # Размещение таблицы на окне
