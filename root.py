@@ -28,7 +28,7 @@ def init():
 
     # Main_Root_Settings
     root = tkb.Window(themename="vapor")
-    root.geometry("1200x500+300+200")
+    root.geometry("1200x1000+300+200")
     root.resizable(False, False)
     root.title("Mentala")
 
