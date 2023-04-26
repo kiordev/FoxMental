@@ -17,7 +17,8 @@ class MainRoot(tkb.Window):
         self.style.theme_use('vapor')
         self.geometry("1200x500+300+200")
         self.resizable(False, False)
-        self.title("Mentala")
+        self.title("FoxMental")
+        self.iconbitmap('icon.ico')
 
         # Root_Grid_Configure
         self.rowconfigure(0, weight=1)
