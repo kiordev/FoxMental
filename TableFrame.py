@@ -1,83 +1,97 @@
+# Дипломний проект [PYTHON, TKINTER, TTKBOOTSTRAP] | NAME: "MENTALA"
+# NoteBookFrame
+# Кіор Олександр Сергійович, ВТ-19, 20.04.2023
+
 import ttkbootstrap as tkb
 import tkinter as tk
-# -- coding: utf-8 --
-def TableFrameOn(root):
-    # =======Table_Main_Frame + Table=======
-    table_main_frame = tkb.Frame(root, bootstyle="dark")
-    table_main_frame.grid(row=0, column=1, sticky="nsew")
-    # Test_Frame_Name
-    test_name_label = tkb.Label(table_main_frame, text="ТАБЛИЦЯ", font=("Gotham-bold", 15), bootstyle="inverse-dark")
-    test_name_label.pack(pady=10)
+from ttkbootstrap.constants import *
 
-    # Создание заголовков для колонок
-    columns = ("Событие", "Мысли", "Эмоция", "Действие")
+class TableFrame(tkb.Frame):
+    def __init__(self, root):
+        super().__init__()
+        # =======Table_Main_Frame + Table=======
+        self.table_main_frame = tkb.Frame(root, bootstyle="dark")
+        self.table_main_frame.grid(row=0, column=1, sticky="nsew")
+        # Test_Frame_Name
+        self.test_name_label = tkb.Label(self.table_main_frame, text="ТАБЛИЦЯ", font=("Gotham-bold", 15),
+                                    bootstyle="inverse-dark")
+        self.test_name_label.pack(pady=10)
 
-    # Создание таблицы
-    table = tkb.Treeview(table_main_frame, columns=columns, show="headings")
-    for col in columns:
-        table.heading(col, text=col)
+        # Создание заголовков для колонок
+        columns = ("Событие", "Мысли", "Эмоция", "Действие")
 
-    # Установка ширины колонок
-    table.column("Событие", width=200)
-    table.column("Мысли", width=200)
-    table.column("Эмоция", width=200)
-    table.column("Действие", width=200)
-    # Размещение таблицы
-    table.pack()
+        # Создание таблицы
+        self.table = tkb.Treeview(self.table_main_frame, columns=columns, show="headings")
+        for col in columns:
+            self.table.heading(col, text=col)
 
-    # Метод проверки контента в файле
-    try:
-        with open("table_data.txt", "r", encoding='cp1251') as f:
-            for line in f:
-                row_data = line.strip().split(",")
-                table.insert("", tkb.END, values=row_data)
-    except FileNotFoundError:
-        pass
-    # =======Table_Main_Frame + Table=======
+        # Установка ширины колонок
+        self.table.column("Событие", width=200)
+        self.table.column("Мысли", width=200)
+        self.table.column("Эмоция", width=200)
+        self.table.column("Действие", width=200)
+        # Размещение таблицы
+        self.table.pack()
 
-    entry_table_frame = tkb.Frame(table_main_frame, bootstyle='dark')
-    entry_table_frame.pack(pady=10)
+        # Метод проверки контента в файле
+        try:
+            with open("table_data.txt", "r", encoding='cp1251') as f:
+                for line in f:
+                    row_data = line.strip().split(",")
+                    self.table.insert("", tkb.END, values=row_data)
+        except FileNotFoundError:
+            pass
+        # =======Table_Main_Frame + Table=======
 
-    # Entry_Widgets_For_Table
-    event_entry = tkb.Entry(entry_table_frame, font=("Gotham", 12), width=10)
-    event_entry.grid(row=0, column=0, padx=5)
-    thoughts_entry = tkb.Entry(entry_table_frame, font=("Gotham", 12), width=10)
-    thoughts_entry.grid(row=0, column=1, padx=5)
-    emotion_entry = tkb.Entry(entry_table_frame, font=("Gotham", 12), width=10)
-    emotion_entry.grid(row=0, column=2, padx=5)
-    action_entry = tkb.Entry(entry_table_frame, font=("Gotham", 12), width=10)
-    action_entry.grid(row=0, column=3, padx=5)
+        self.entry_table_frame = tkb.Frame(self.table_main_frame, bootstyle='dark')
+        self.entry_table_frame.pack(pady=10)
 
-    def add_row():
-        # Получение данных из полей ввода
-        event = event_entry.get()
-        thoughts = thoughts_entry.get()
-        emotion = emotion_entry.get()
-        action = action_entry.get()
+        # Entry_Widgets_For_Table
+        self.event_entry = tkb.Entry(self.entry_table_frame, font=("Gotham", 12), width=10)
+        self.event_entry.grid(row=0, column=0, padx=5)
+        self.thoughts_entry = tkb.Entry(self.entry_table_frame, font=("Gotham", 12), width=10)
+        self.thoughts_entry.grid(row=0, column=1, padx=5)
+        self.emotion_entry = tkb.Entry(self.entry_table_frame, font=("Gotham", 12), width=10)
+        self.emotion_entry.grid(row=0, column=2, padx=5)
+        self.action_entry = tkb.Entry(self.entry_table_frame, font=("Gotham", 12), width=10)
+        self.action_entry.grid(row=0, column=3, padx=5)
+
+        # Add Record Button
+        self.add_button = tkb.Button(self.table_main_frame, bootstyle='primary', text="ДОДАТИ ПОДІЮ", command=self.add_row)
+        self.add_button.pack(pady=10)
+        # Save Button
+        self.save_button = tkb.Button(self.table_main_frame, text="ЗБЕРЕГТИ", bootstyle='primary',
+                                 command=self.save_table_data)
+        self.save_button.pack(pady=10)
+
+    def add_row(self):
+         # Получение данных из полей ввода
+        self.event = self.event_entry.get()
+        self.thoughts = self.thoughts_entry.get()
+        self.emotion = self.emotion_entry.get()
+        self.action = self.action_entry.get()
 
         # Добавление новой строки в таблицу
-        table.insert("", tkb.END, values=(event, thoughts, emotion, action))
+        self.table.insert("", tkb.END, values=(self.event, self.thoughts, self.emotion, self.action))
 
-        # Очистка полей ввода
-        event_entry.delete(0, tkb.END)
-        thoughts_entry.delete(0, tkb.END)
-        emotion_entry.delete(0, tkb.END)
-        action_entry.delete(0, tkb.END)
+            # Очистка полей ввода
+        self.event_entry.delete(0, tkb.END)
+        self.thoughts_entry.delete(0, tkb.END)
+        self.emotion_entry.delete(0, tkb.END)
+        self.action_entry.delete(0, tkb.END)
 
-    # Table Save Data
-    def save_table_data():
+        # Table Save Data
+    def save_table_data(self):
 
         with open("table_data.txt", "w") as f:
-            for row_id in table.get_children():
-                row_data = table.item(row_id)["values"]
+            for row_id in self.table.get_children():
+                row_data = self.table.item(row_id)["values"]
                 f.write(",".join(row_data) + "\n")
 
-    # Add Record Button
-    add_button = tkb.Button(table_main_frame, bootstyle='primary', text="ДОДАТИ ПОДІЮ", command=add_row)
-    add_button.pack(pady=10)
-    # Save Button
-    save_button = tkb.Button(table_main_frame, text="ЗБЕРЕГТИ", bootstyle='primary', command=save_table_data)
-    save_button.pack(pady=10)
 
-    # Размещение таблицы на окне
+
+
+
+
+
 

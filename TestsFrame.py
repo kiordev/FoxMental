@@ -1,9 +1,5 @@
 import ttkbootstrap as tkb
-from ttkbootstrap.constants import *
 
-import tests_db
-import tests_db as testdb
-import QuastionsFrame as qf
 
 def TestsFrameOn(root):
     def Tests_Main_Logic(button):
