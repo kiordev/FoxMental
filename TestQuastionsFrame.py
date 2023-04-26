@@ -5,6 +5,9 @@
 import ttkbootstrap as tkb
 import tkinter as tk
 from ttkbootstrap.constants import *
+import tests_db as tdb
+
+import TestingWindowFrame as twf
 
 class TestQuastionsFrame(tkb.Frame):
     def __init__(self, root):
@@ -37,7 +40,7 @@ class TestQuastionsFrame(tkb.Frame):
         self.r, self.c = 0, 0
         for i in range(0, 8):
             button = tkb.Button(self.Frame_For_Buttons, bootstyle='info', text=self.variants_list[i], width=30)
-            button.config(command=lambda button=button: Tests_Main_Logic(button))  # Ключевой аспект в логике программы
+            button.config(command=lambda button=button: self.Tests_Main_Logic(button))  # Ключевой аспект в логике программы
             button.grid(row=self.r, column=self.c, padx=10, pady=10)
             self.r += 1
             if self.r == 4:
@@ -45,5 +48,13 @@ class TestQuastionsFrame(tkb.Frame):
                 self.r = 0
 
     def Tests_Main_Logic(self, button):
-        pass
+        if button["text"] == "ДЕПРЕССИЯ":
+            test = twf.TestingFrame(tdb.depression_list, "ДЕПРЕССИЯ")
+            test.mainloop()
+        if button["text"] == "ПТСР":
+            test = twf.TestingFrame(tdb.ptsr_list, "ПТСР")
+            test.mainloop()
+        else:
+            print(button["text"])
+
 
