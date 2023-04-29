@@ -57,12 +57,12 @@ class MainRoot(tkb.Window):
         self.my_theme = self.style.theme_names()
         self.theme_combobox = tkb.Combobox(self.menu_frame, values=self.my_theme)
         self.theme_combobox.pack(pady=5, padx=10)
-        self.accept_theme_button = tkb.Button(self.menu_frame, bootstyle='primary', text='ACCEPT THEME', command=self.accept_theme)
+        self.accept_theme_button = tkb.Button(self.menu_frame, bootstyle='primary', text='ПРИЙНЯТИ ТЕМУ', command=self.accept_theme)
         self.accept_theme_button.pack(pady=10, padx=10)
         self.theme_combobox.current(15)
 
         # Version_Label
-        self.version_label = tkb.Label(self.menu_frame, text="MentalFox | 0.9 | WINDOWS", font=("Gotham", 10), bootstyle="primary")
+        self.version_label = tkb.Label(self.menu_frame, text="MentalFox | 1.0 | WINDOWS", font=("Gotham", 10), bootstyle="primary")
         self.version_label.pack(anchor="s", side=tkb.BOTTOM, padx=10)
 
         # Methods
