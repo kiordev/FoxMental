@@ -1,11 +1,9 @@
 # Дипломний проект [PYTHON, TKINTER, TTKBOOTSTRAP] | NAME: "MENTALA"
 # Кіор Олександр Сергійович, ВТ-19, 20.04.2023
 
-# MAIN_IMPORTS
 import ttkbootstrap as tkb
 import tkinter as tk
 from ttkbootstrap.constants import *
-
 import NoteBookFrame as nbf
 import TableFrame as tb
 import TestQuastionsFrame as tqf

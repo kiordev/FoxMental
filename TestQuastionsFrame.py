@@ -6,7 +6,6 @@ import ttkbootstrap as tkb
 import tkinter as tk
 from ttkbootstrap.constants import *
 import tests_db as tdb
-
 import TestingWindowFrame as twf
 
 class TestQuastionsFrame(tkb.Frame):
