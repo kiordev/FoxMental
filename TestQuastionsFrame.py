@@ -33,8 +33,8 @@ class TestQuastionsFrame(tkb.Frame):
         self.Frame_For_Buttons.pack(pady=20)
 
         # Variants List
-        self.variants_list = ["ДЕПРЕССИЯ", "САР", "ОКР", "ПТСР",
-                         "ТРЕВОЖНОЕ РАССТРОЙСТВО", "САМООЦЕНКА", "ОБЩИЙ ТЕСТ", "ПРЕРЫВАНИЕ КОНТАКТА"]
+        self.variants_list = ["ДЕПРЕСІЯ", "САР", "ОКР", "ПТСР",
+                         "ТРИВОЖНИЙ РОЗЛАД", "САМООЦІНКА", "ЗАГАЛЬНИЙ ТЕСТ", "КОГНІТИВНИ СПОТВОРЕННЯ"]
 
         # Button Buildings Loop
         self.r, self.c = 0, 0
@@ -48,13 +48,11 @@ class TestQuastionsFrame(tkb.Frame):
                 self.r = 0
 
     def Tests_Main_Logic(self, button):
-        if button["text"] == "ДЕПРЕССИЯ":
-            test = twf.TestingFrame(tdb.depression_list, "ДЕПРЕССИЯ")
-            test.mainloop()
-        if button["text"] == "ПТСР":
-            test = twf.TestingFrame(tdb.ptsr_list, "ПТСР")
-            test.mainloop()
-        else:
-            print(button["text"])
+        for i, test in enumerate(self.variants_list):
+            if self.variants_list[i] == button["text"]:
+                test = twf.TestingFrame(self.variants_list[i])
+                test.mainloop()
+
+
 
 
