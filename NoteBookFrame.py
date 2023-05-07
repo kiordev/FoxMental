@@ -30,7 +30,7 @@ class NoteBookFrame(tkb.Frame):
         self.my_text.pack()
 
         # Save NoteBook Text Button
-        self.save_button = tkb.Button(self.notebook_main_frame, text="SAVE", bootstyle='primary',
+        self.save_button = tkb.Button(self.notebook_main_frame, text="ЗБЕРЕГТИ", bootstyle='primary',
                                       command=self.save_notebook_content)
         self.save_button.pack(pady=10)
 
