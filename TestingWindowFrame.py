@@ -67,7 +67,7 @@ class TestingFrame(tkb.Toplevel):
                                             stripethickness=10,
                                             textright='',
                                             amounttotal=12,
-                                            metersize=250)
+                                            metersize=160)
 
         self.result_score_meter.pack(pady=10)
 

@@ -19,7 +19,7 @@ class TestQuastionsFrame(tkb.Frame):
                                     font=("Gotham-bold", 25))
         self.test_main_label.pack(pady=10)
         self.attention_text = "Увага! Самолікування може бути шкідливим для здоров'я. " \
-                         "\nРезультати тестів необхідно проаналазувати з фахівцем уникаючи гіпероцінки."
+                         "\nРезультати тестів необхідно проаналазувати з фахівцем уникаючи єффекту Данінга-Крюгера."
 
         # Info Label
         self.info_main_label = tkb.Label(self.main_test_frame, bootstyle="inverse-dark",
