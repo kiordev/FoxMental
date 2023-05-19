@@ -1,6 +1,0 @@
-class QuastionFrameTest():
-   pass
-
-
-
-
