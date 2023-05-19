@@ -18,7 +18,7 @@ class TableFrame(tkb.Frame):
         self.test_name_label.pack(pady=10)
 
         # Создание заголовков для колонок
-        columns = ("Событие", "Мысли", "Эмоция", "Действие")
+        columns = ("Ситуація", "Думки", "Эмоція", "Дія")
 
         # Создание таблицы
         self.table = tkb.Treeview(self.table_main_frame, columns=columns, show="headings")
@@ -26,10 +26,10 @@ class TableFrame(tkb.Frame):
             self.table.heading(col, text=col)
 
         # Установка ширины колонок
-        self.table.column("Событие", width=200)
-        self.table.column("Мысли", width=200)
-        self.table.column("Эмоция", width=200)
-        self.table.column("Действие", width=200)
+        self.table.column("Ситуація", width=200)
+        self.table.column("Думки", width=200)
+        self.table.column("Эмоція", width=200)
+        self.table.column("Дія", width=200)
         # Размещение таблицы
         self.table.pack()
 
