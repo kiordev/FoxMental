@@ -21,12 +21,12 @@ class TestingFrame(tkb.Toplevel):
         self.test_title = test_title
 
         # Test Name Label
-        self.main_label = tkb.Label(self, text=test_title, font=("Gotham-bold", 15), bootstyle='danger')
-        self.main_label.pack(pady=10)
+        self.main_label = tkb.Label(self, text=test_title, font=("Gotham-bold", 12), bootstyle='danger')
+        self.main_label.pack(pady=5)
 
         # Qustions_Frame
         self.quastions_frame = tkb.Frame(self, bootstyle="dark")
-        self.quastions_frame.pack(pady=10)
+        self.quastions_frame.pack(pady=5)
 
         # Check_Buttons_Score_Control
         self.score_list = [0]
@@ -43,7 +43,7 @@ class TestingFrame(tkb.Toplevel):
                                          bootstyle='primary', variable=var,
                                          text=quastion,
                                          offvalue=0,
-                                         onvalue=1).grid(row=i, column=1, padx=10, pady=10, sticky="w")
+                                         onvalue=1).grid(row=i, column=1, padx=10, pady=6, sticky="w")
                     i += 1
                     print(i)
             else:
@@ -57,7 +57,7 @@ class TestingFrame(tkb.Toplevel):
 
         # Result Button
         self.result_button = tkb.Button(self.result_frame, text="РЕЗУЛЬТАТ", bootstyle='primary', command=self.check_result)
-        self.result_button.pack(pady=10)
+        self.result_button.pack(pady=5)
 
         # Meter Widget For Score
         self.result_score_meter = tkb.Meter(self.result_frame,
@@ -67,7 +67,7 @@ class TestingFrame(tkb.Toplevel):
                                             stripethickness=10,
                                             textright='',
                                             amounttotal=12,
-                                            metersize=160)
+                                            metersize=120)
 
         self.result_score_meter.pack(pady=10)
 
