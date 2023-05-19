@@ -13,7 +13,7 @@ class NoteBookFrame(tkb.Frame):
         self.notebook_main_frame.grid(row=0, column=1, sticky="nsew")
 
         # NoteBook_Frame_Name
-        self.notebook_name_label = tkb.Label(self.notebook_main_frame, text="ТЕКСТ", font=("Gotham-bold", 15),
+        self.notebook_name_label = tkb.Label(self.notebook_main_frame, text="НОТАТНИК", font=("Gotham-bold", 15),
                                         bootstyle="inverse-dark")
         self.notebook_name_label.pack(pady=10)
 
@@ -23,7 +23,7 @@ class NoteBookFrame(tkb.Frame):
 
         # Create PAGE
         self.tab1 = tkb.Frame(self.my_notebook)
-        self.my_notebook.add(self.tab1, text='NOTES')
+        self.my_notebook.add(self.tab1, text='НОТАТКИ')
 
         # Create a Text Field
         self.my_text = tkb.Text(self.tab1, height=10, width=90)

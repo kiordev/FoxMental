@@ -60,7 +60,7 @@ class MainRoot(tkb.Window):
         self.theme_combobox.current(15)
 
         # Version_Label
-        self.version_label = tkb.Label(self.menu_frame, text="MentalFox | 1.0 | WINDOWS", font=("Gotham", 10), bootstyle="primary")
+        self.version_label = tkb.Label(self.menu_frame, text="FoxMental | 1.0 | WINDOWS ver", font=("Gotham", 10), bootstyle="primary")
         self.version_label.pack(anchor="s", side=tkb.BOTTOM, padx=10)
 
         # Methods
