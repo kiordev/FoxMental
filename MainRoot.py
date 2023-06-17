@@ -8,6 +8,7 @@ import NoteBookFrame as nbf
 import TableFrame as tb
 import TestQuastionsFrame as tqf
 import Faq_Frame as ff
+import ExpressTestingFrame as etf
 
 class MainRoot(tkb.Window):
     def __init__(self):
@@ -30,6 +31,10 @@ class MainRoot(tkb.Window):
         # Menu Label
         self.menu_label = tkb.Label(self.menu_frame, text="ГОЛОВНЕ МЕНЮ", font=("Gotham-bold", 10), bootstyle="primary")
         self.menu_label.pack(pady=10)
+
+        # Start_Express_Test_Button
+        self.express_test_button = tkb.Button(self.menu_frame, text='ЭКСПРЕСС-ТЕСТ', bootstyle="secondary", width=20, command=self.express_on)
+        self.express_test_button.pack(pady=10)
 
         # Start_Test_Button
         self.test_button = tkb.Button(self.menu_frame, text='ПРОЙТИ ТЕСТ', bootstyle="primary", width=20, command=self.test_on)
@@ -85,6 +90,10 @@ class MainRoot(tkb.Window):
     def faq_on(self):
         faq = ff.Faq_Frame(self)
         faq.tkraise()
+
+    def express_on(self):
+        express = etf.ExpressTestingFrame(self)
+        express.tkraise()
 
         # Accept Theme
     def accept_theme(self):

@@ -1,5 +1,5 @@
 # Дипломний проект [PYTHON, TKINTER, TTKBOOTSTRAP] | NAME: "MENTALA"
-# NoteBookFrame
+# Faq_Frame
 # Кіор Олександр Сергійович, ВТ-19, 20.04.2023
 
 import ttkbootstrap as tkb
