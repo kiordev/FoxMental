@@ -33,6 +33,9 @@ class NoteBookFrame(tkb.Frame):
         self.save_button = tkb.Button(self.notebook_main_frame, text="ЗБЕРЕГТИ", bootstyle='primary',
                                       command=self.save_notebook_content)
         self.save_button.pack(pady=10)
+        # Saved Message
+        self.saved_message_label = tkb.Label(self.notebook_main_frame, text="ЗБЕРЕЖЕНО!", bootstyle="inverse-dark",
+                                             font=("Gotham-bold", 10))
 
         # CheckNoteBookContent
         try:
@@ -43,6 +46,7 @@ class NoteBookFrame(tkb.Frame):
             pass
 
     def save_notebook_content(self):
+        self.saved_message_label.pack(pady=10)
         file = open('notes.txt', 'w')
         content = self.my_text.get("1.0", "end-1c")
         file.write(content)
