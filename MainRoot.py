@@ -52,7 +52,7 @@ class MainRoot(tkb.Window):
         self.menu_separator.pack(fill='x', pady=10)
 
         # Settings Label
-        self.settings_label = tkb.Label(self.menu_frame, text="НАЛААШТУВАННЯ", font=("Gotham-bold", 10), bootstyle="primary")
+        self.settings_label = tkb.Label(self.menu_frame, text="НАЛАШТУВАННЯ", font=("Gotham-bold", 10), bootstyle="primary")
         self.settings_label.pack(pady=10)
 
         # Theme Combo Box
