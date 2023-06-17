@@ -7,16 +7,16 @@ from ttkbootstrap.constants import *
 import NoteBookFrame as nbf
 import TableFrame as tb
 import TestQuastionsFrame as tqf
+import Faq_Frame as ff
 
 class MainRoot(tkb.Window):
     def __init__(self):
         super().__init__()
         # Main_Root_Settings
         self.style.theme_use('vapor')
-        self.geometry("1200x500+300+200")
+        self.geometry("1400x600+300+200")
         self.resizable(False, False)
         self.title("FoxMental")
-        self.iconbitmap('icon.ico')
 
         # Root_Grid_Configure
         self.rowconfigure(0, weight=1)
@@ -43,6 +43,10 @@ class MainRoot(tkb.Window):
         self.notebook_button = tkb.Button(self.menu_frame, text='НОТАТКИ', bootstyle="primary", width=20, command=self.notebook_on)
         self.notebook_button.pack(pady=10)
 
+        # Start_Faq_Button
+        self.faq_button = tkb.Button(self.menu_frame, text='FAQ', bootstyle="primary", width=20,command=self.faq_on)
+        self.faq_button.pack(pady=10)
+
         # Separator
         self.menu_separator = tkb.Separator(self.menu_frame, bootstyle='primary')
         self.menu_separator.pack(fill='x', pady=10)
@@ -60,7 +64,7 @@ class MainRoot(tkb.Window):
         self.theme_combobox.current(15)
 
         # Version_Label
-        self.version_label = tkb.Label(self.menu_frame, text="FoxMental | 1.0 | WINDOWS ver", font=("Gotham", 10), bootstyle="primary")
+        self.version_label = tkb.Label(self.menu_frame, text="FoxMental | 1.2.5 | WINDOWS ver", font=("Gotham", 10), bootstyle="primary")
         self.version_label.pack(anchor="s", side=tkb.BOTTOM, padx=10)
 
         # Methods
@@ -77,6 +81,10 @@ class MainRoot(tkb.Window):
     def table_on(self):
         table = tb.TableFrame(self)
         table.tkraise()
+
+    def faq_on(self):
+        faq = ff.Faq_Frame(self)
+        faq.tkraise()
 
         # Accept Theme
     def accept_theme(self):
