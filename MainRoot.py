@@ -44,7 +44,7 @@ class MainRoot(tkb.Window):
         self.notebook_button.pack(pady=10)
 
         # Start_Faq_Button
-        self.faq_button = tkb.Button(self.menu_frame, text='FAQ', bootstyle="primary", width=20,command=self.faq_on)
+        self.faq_button = tkb.Button(self.menu_frame, text='FAQ (!)', bootstyle="danger", width=20, command=self.faq_on)
         self.faq_button.pack(pady=10)
 
         # Separator
@@ -64,7 +64,7 @@ class MainRoot(tkb.Window):
         self.theme_combobox.current(15)
 
         # Version_Label
-        self.version_label = tkb.Label(self.menu_frame, text="FoxMental | 1.2.5 | WINDOWS ver", font=("Gotham", 10), bootstyle="primary")
+        self.version_label = tkb.Label(self.menu_frame, text="FoxMental | 1.2.5 | FullHD ver", font=("Gotham", 10), bootstyle="primary")
         self.version_label.pack(anchor="s", side=tkb.BOTTOM, padx=10)
 
         # Methods
