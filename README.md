@@ -6,6 +6,9 @@
 ## Installation
 
 The repository can be cloned using the standard template. After installation, the GUI needs to be installed using the following command in the terminal:
+```python
+pip install ttkbootstrap
+```
 
 ## Usage
 
